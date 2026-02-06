@@ -7,8 +7,8 @@ describe('GET /', function() {
     it('returns a GET request', function(done) {
       request(app)
         .get('/')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
         .expect(200, done);
         
     });
