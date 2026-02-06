@@ -1,50 +1,73 @@
-# cryptorest-api ![travis-ci](https://travis-ci.org/daplay/jsurbtc.svg?branch=master)![PyPI - Status](https://img.shields.io/pypi/status/trading-api-wrappers.svg)
+# Buda API TS
 
-Nodejs client for buda.com [REST API](https://api.buda.com)
-  
-### Scripts
+Cliente en TypeScript para la API REST publica de [buda.com](https://api.buda.com).
+
+Expone una API HTTP simple que:
+
+- consulta mercados de Buda,
+- calcula spread por mercado (`min_ask - max_bid`),
+- guarda una alerta maxima local por mercado,
+- devuelve resultados en JSON.
+
+## Requisitos
+
+- Node.js `>= 18`
+- npm `>= 9`
+
+## Instalacion
 
 ```bash
-npm run dev    # run TypeScript in watch mode
-npm run build  # compile to dist/
-npm start      # run compiled server
-npm test       # run tests
+npm install
 ```
 
-  ### Install
-```javascript  
-Express
-npm i express
+## Scripts
 
-Axios
-npm i axios
-
-Cors
-npm i cors
-
-Jest
-npm install --save-dev jest
+```bash
+npm run dev          # desarrollo con recarga en caliente (ts-node-dev)
+npm run build        # compila TypeScript a dist/
+npm start            # ejecuta build compilado
+npm test             # tests con Jest
+npm run lint         # lint con ESLint
+npm run lint:fix     # corrige issues de lint
+npm run format       # formatea con Prettier
+npm run format:check # valida formato
 ```
 
-  
-  ### Usage
+## Endpoints
 
-Please check the app.spec.js for additional information.
+### `GET /`
 
-```javascript
-const app = require("../app");
-const request = require('supertest');
+Retorna un mensaje simple de conexion y sugiere usar `/api`.
 
-describe('GET /api', function() {
-  jest.setTimeout(30000* 1000);
-    it('returns a GET request', function(done) {
-      request(app)
-        .get('/api')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200, done);
-        
-    });
-  });
+### `GET /api`
 
+Retorna spreads por mercado en formato JSON.
+
+Ejemplo de respuesta:
+
+```json
+[
+  [
+    {
+      "market": "btc-clp",
+      "max_bid": "10000000.0",
+      "min_ask": "10010000.0",
+      "spread": 10000,
+      "alerta": 10000
+    }
+  ]
+]
 ```
+
+## Testing
+
+Los tests viven en `tests/` y usan `supertest` contra la app de Express.
+
+```bash
+npm test
+```
+
+## Notas
+
+- El storage de alertas usa `node-localstorage` en `./scratch`.
+- `dist/` es salida de build y no se versiona.

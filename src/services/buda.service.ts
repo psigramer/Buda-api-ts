@@ -16,14 +16,19 @@ axiosRetry(httpClient, {
 });
 
 export async function getMarketIds(): Promise<string[]> {
-  const response = await httpClient.get<MarketsEnvelope>('https://www.buda.com/api/v2/markets.json', {
-    headers: { 'X-Custom-Header': 'foobar' },
-  });
+  const response = await httpClient.get<MarketsEnvelope>(
+    'https://www.buda.com/api/v2/markets.json',
+    {
+      headers: { 'X-Custom-Header': 'foobar' },
+    },
+  );
 
   return response.data.markets.map((market) => market.id);
 }
 
 export async function getTicker(marketId: string): Promise<Ticker> {
-  const response = await httpClient.get<TickerEnvelope>(`https://www.buda.com/api/v2/markets/${marketId}/ticker`);
+  const response = await httpClient.get<TickerEnvelope>(
+    `https://www.buda.com/api/v2/markets/${marketId}/ticker`,
+  );
   return response.data.ticker;
 }
