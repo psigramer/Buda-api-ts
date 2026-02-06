@@ -2,11 +2,12 @@
   "name": "prueba_buda",
   "version": "1.0.0",
   "description": "Rest api para test buda.",
-  "main": "app.js",
+  "main": "dist/server.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "test": "jest",
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "node dist/server.js"
   },
   "author": "Sebastian Gutierrez",
   "license": "MIT",
@@ -18,7 +19,16 @@
     "node-localstorage": "^3.0.5"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.3.0",
+    "@types/node-localstorage": "^1.3.3",
+    "@types/supertest": "^6.0.3",
     "jest": "^30.2.0",
-    "supertest": "^7.2.2"
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
   }
 }

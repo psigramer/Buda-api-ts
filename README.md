@@ -1,6 +1,16 @@
 # cryptorest-api ![travis-ci](https://travis-ci.org/daplay/jsurbtc.svg?branch=master)![PyPI - Status](https://img.shields.io/pypi/status/trading-api-wrappers.svg)
 
 Nodejs client for buda.com [REST API](https://api.buda.com)
+  
+### Scripts
+
+```bash
+npm run dev    # run TypeScript in watch mode
+npm run build  # compile to dist/
+npm start      # run compiled server
+npm test       # run tests
+```
+
   ### Install
 ```javascript  
 Express
